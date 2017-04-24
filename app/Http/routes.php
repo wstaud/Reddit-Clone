@@ -24,7 +24,7 @@ Route::get('/sayhello/{name?}', function ($name = "World") {
 Route::get('/rolldice/{guess?}', function ($guess) {
     $roll = rand(1,6);
 
-    if($guess === $roll){
+    if($guess == $roll){
         $message = "You guessed it!";
     }else{
         $message = "You were wrong";
