@@ -42,11 +42,24 @@ Route::get('/rolldice/{guess?}', function ($guess) {
 
 
 Route::get('/uppercase/{word}', function ($word) {
-    return strtoupper($word);
+    $newWord = strtoupper($word);
+    $data = [
+        'word' => $word,
+        'newWord' => $newWord
+    ];
+
+    return view('uppercase', $data);
 });
 
 Route::get('/increment/{number}', function ($number) {
-    return $number + 1;
+    $newNumber = $number + 1;
+
+    $data = [
+        'number' => $number,
+        'newNumber' => $newNumber
+    ];
+
+    return view('increment', $data);
 });
 
 Route::get('/add/{a}/{b}', function ($a, $b) {
