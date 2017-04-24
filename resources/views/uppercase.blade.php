@@ -1,6 +1,13 @@
 @extends('layouts.master')
 
 @section('content')
-    <h1>Original Word: {{$word}}</h1>
-    <h1>Uppercase Word: {{$newWord}}</h1>
+    <div class="row">
+        <div class="small-6 columns">
+            <h1>Original Word: {{$word}}</h1>
+        </div>
+        <div class="small-6 columns">
+            <h1>Uppercase Word: {{$newWord}}</h1>
+        </div>
+    </div>
+
 @stop
