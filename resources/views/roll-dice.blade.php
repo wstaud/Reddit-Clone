@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>My First View</title>
+        <title>Roll Dice</title>
     </head>
     <body>
         <h1><?= $message ?></h1>
