@@ -29,5 +29,17 @@
             <button type="submit" class="button">Submit</button>
         </div>
     </form>
-
+    @if (count($errors) > 0){
+        <div class="row">
+            <div class="small-12 columns">
+                <div class="callout alert">
+                    <h5>Error:</h5>
+                    @foreach ($errors->all() as $error)
+                        <p>-{{ $error }}</p>
+                    @endforeach
+                </div>
+            </div>
+        </div>
+    }
+    @endif
 @stop

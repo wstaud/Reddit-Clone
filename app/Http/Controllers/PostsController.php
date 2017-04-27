@@ -12,7 +12,7 @@ class PostsController extends Controller
 
     public function index()
     {
-        $posts = \App\Models\Post::all();
+        $posts = \App\Models\Post::paginate(4);
         return view('/posts/index')->with('posts', $posts);
 
     }
@@ -24,14 +24,21 @@ class PostsController extends Controller
 
     public function store(Request $request)
     {
-        if ($request->has('title')) {
-            $post = new \App\Models\Post();
-            $post->title = $request->title;
-            $post->url = $request->url;
-            $post->content = $request->content;
-            $post->created_by = 1; //TODO: Update this to actual user ID session
-            $post->save();
-        }
+        $rules = array(
+            'title' => 'required|max:100',
+            'url'   => 'required',
+            'content' => 'required'
+        );
+
+        $this->validate($request, $rules);
+
+        $post = new \App\Models\Post();
+        $post->title = $request->title;
+        $post->url = $request->url;
+        $post->content = $request->content;
+        $post->created_by = 1; //TODO: Update this to actual user ID session
+        $post->save();
+
         return redirect()->action('PostsController@index');
     }
 
