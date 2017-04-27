@@ -5,27 +5,28 @@
     <div class="row align-left">
         <h1>Create a Post</h1>
     </div>
-    <form action="{{ action('PostsController@store') }}">
+    <form method="POST" action="{{ action('PostsController@store') }}">
+        {!! csrf_field() !!}
         <div class="row">
             <div class="small-12 columns">
                 <label>Title
-                    <input type="text">
+                    <input name="title" type="text">
                 </label>
             </div>
             <div class="small-12 columns">
                 <label>
                     Content
-                    <textarea placeholder="None"></textarea>
+                    <textarea name="content" placeholder="None"></textarea>
                 </label>
             </div>
             <div class="small-12 columns">
                 <label>URL
-                    <input type="text">
+                    <input name="url" type="text">
                 </label>
             </div>
         </div>
         <div class="row align-center">
-            <button type="button" class="button">Submit</button>
+            <button type="submit" class="button">Submit</button>
         </div>
     </form>
 
