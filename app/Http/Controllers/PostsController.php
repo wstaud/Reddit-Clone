@@ -25,7 +25,6 @@ class PostsController extends Controller
     public function store(Request $request)
     {
         if ($request->has('title')) {
-            // name is not empty
             $post = new \App\Models\Post();
             $post->title = $request->title;
             $post->url = $request->url;
@@ -33,7 +32,7 @@ class PostsController extends Controller
             $post->created_by = 1; //TODO: Update this to actual user ID session
             $post->save();
         }
-        return redirect('posts');
+        return redirect()->action('PostsController@index');
     }
 
     public function show($id)
