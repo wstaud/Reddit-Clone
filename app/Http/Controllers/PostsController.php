@@ -10,11 +10,8 @@ use App\Http\Controllers\Controller;
 class PostsController extends Controller
 {
 
-    public function index(Request $request)
+    public function index()
     {
-        $session = $request->session(); // like session start
-        $session->put('greet', 'hello world'); //like $_SESSION['greet'] = 'hello world'
-
         $posts = \App\Models\Post::orderBy('created_at', 'desc')->paginate(4);
         return view('/posts/index')->with('posts', $posts);
     }
@@ -46,12 +43,12 @@ class PostsController extends Controller
 
     public function show($id)
     {
-    	$post = \App\Models\Post::find($id);
-    	if ($post === null){
-    		return view('404');
-    	}else{
-    		return view('/posts/show')->with('post', $post);
-    	}
+        $post = \App\Models\Post::find($id);
+        if ($post === null){
+            abort(404);
+        }else{
+            return view('/posts/show')->with('post', $post);
+        }
     }
 
     public function edit($id)
