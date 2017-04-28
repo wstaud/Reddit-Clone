@@ -9,9 +9,8 @@
         </div>
         <div class="small-10 medium-10 column">
             <a href="/posts/{{$post->id}}"><h5>{{$post->title}}</h5></a>
-            <p>{{$post->content}}</p>
             <a href="{{$post->url}}">{{$post->url}}</a>
-            <p class="timeFont">Created on: {{$post->created_at->diffForHumans()}} by:</p>
+            <p class="timeFont">Created {{$post->created_at->diffForHumans()}} by:</p>
         </div>
     </div>
     @endforeach

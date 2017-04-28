@@ -10,11 +10,13 @@ use App\Http\Controllers\Controller;
 class PostsController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
-        $posts = \App\Models\Post::paginate(4);
-        return view('/posts/index')->with('posts', $posts);
+        $session = $request->session(); // like session start
+        $session->put('greet', 'hello world'); //like $_SESSION['greet'] = 'hello world'
 
+        $posts = \App\Models\Post::orderBy('created_at', 'desc')->paginate(4);
+        return view('/posts/index')->with('posts', $posts);
     }
 
     public function create()
