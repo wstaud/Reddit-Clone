@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Session;
+use Log;
 
 class PostsController extends Controller
 {
@@ -37,32 +39,42 @@ class PostsController extends Controller
         $post->content = $request->content;
         $post->created_by = 1; //TODO: Update this to actual user ID session
         $post->save();
+        
+        $request->session()->flash('successMessage', 'Post saved successfully');
+        Log::info('New post saved', $request->all());
 
-        return redirect()->action('PostsController@index');
+        return redirect()->action('PostsController@show', [$post->id]); //Redirects to post after creation
     }
 
     public function show($id)
     {
-        $post = \App\Models\Post::find($id);
-        if ($post === null){
-            abort(404);
-        }else{
-            return view('/posts/show')->with('post', $post);
-        }
+        $post = \App\Models\Post::findOrFail($id);
+       
+        return view('/posts/show')->with('post', $post);
+        
     }
 
     public function edit($id)
     {
-        return 'This should show a form for editing a post';
+        $post = \App\Models\Post::findOrFail($id);
+        return view('/posts/edit')->with('posts', $posts);
     }
 
     public function update(Request $request, $id)
-    {
-        return 'This should edit a post';
+    {   
+        $post = \App\Models\Post::findOrFail($id);
+        $post->title = $request->title;
+        $post->url = $request->url;
+        $post->content = $request->content;
+        $post->created_by = $post->created_by;
+        $post->save();
+        return redirect()->action('PostsController@show', [$post->id]); //Redirects to post after edit
     }
 
     public function destroy($id)
     {
-        return 'This should remove a post';
+        $post = \App\Models\Post::findOrFail($id);
+        $post->delete();
+        return redirect()->action('PostsController@index');
     }
 }
