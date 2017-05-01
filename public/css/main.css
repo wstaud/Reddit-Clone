@@ -1,9 +1,14 @@
 body {
-  background: #eff0f2; }
+  background: #ffffd3; }
 
 p {
   margin: 0;
   font-size: 14px; }
+
+.navbar {
+  height: 40px;
+  width: 100%;
+  background: #bbff68; }
 
 .grayBox {
   margin-top: 20px;

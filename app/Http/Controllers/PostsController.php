@@ -20,6 +20,9 @@ class PostsController extends Controller
 
     public function create()
     {
+        if (!\Auth::check()) {
+            return redirect()->action('Auth\AuthController@getLogin');
+        }
         return view('/posts/create');
     }
 
